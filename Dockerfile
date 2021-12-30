@@ -7,6 +7,7 @@ RUN mkdir /usr/src/app
 WORKDIR /usr/src/app
 COPY index.py .
 RUN pip install flask
-RUN pip install gunicorn gevent
+RUN pip install gunicorn 
+RUN pip install gevent
 
 CMD ["gunicorn", "app:app", "-c", "gunicorn.conf"]
