@@ -10,4 +10,4 @@ WORKDIR /app
 EXPOSE 5000
 
 ENTRYPOINT ["python"]
-CMD ["helloworld.py"]
+CMD ["index.py"]
