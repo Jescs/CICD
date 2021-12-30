@@ -1,14 +1,12 @@
-FROM ubuntu:16.04
+FROM ubuntu:20.04
 
 ENV PATH=/home/ubuntu/.virtualenvs/bin:$PATH
-
 RUN apt-get update && apt-get install -y python python-pip
-RUN pip install --upgrade pip 
 
-  
-RUN mkdir /app
-
+RUN mkdir /usr/src/app
+WORKDIR /usr/src/app
+COPY index.py .
 RUN pip install flask
-COPY index.py /opt
+RUN pip install gunicorn gevent
 
-ENTRYPOINT FLASK_APP=/opt/index.py flask run --host=0.0.0.0
+CMD ["gunicorn", "app:app", "-c", "gunicorn.conf"]
