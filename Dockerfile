@@ -1,13 +1,7 @@
-FROM python:3.6.4
-RUN apk add --no-cache py3-pip \
-    && pip3 install --upgrade pip
+FROM ubuntu:16.04
+RUN apt-get update && apt-get install -y python python-pip
 RUN mkdir /app
-RUN pip3 --no-cache-dir install -r requirements.txt
-COPY index.py /app
+RUN pip install flask
+COPY index.py /opt
 
-WORKDIR /app
-
-EXPOSE 5000
-
-ENTRYPOINT ["python"]
-CMD ["index.py"]
+ENTRYPOINT FLASK_APP=/opt/app.py flask run --host=0.0.0.0
