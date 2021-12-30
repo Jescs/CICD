@@ -1,13 +1,8 @@
-FROM ubuntu:20.04
+FROM python:3.7-alpine
 
-ENV PATH=/home/ubuntu/.virtualenvs/bin:$PATH
-RUN apt-get update && apt-get install -y python python-pip
+WORKDIR /demoapp
+COPY ./ ./
 
-RUN mkdir /usr/src/app
-WORKDIR /usr/src/app
-COPY index.py .
 RUN pip install flask
-RUN pip install gunicorn 
-RUN pip install gevent
 
-CMD ["gunicorn", "app:app", "-c", "gunicorn.conf"]
+CMD ["python", "app.py"]
