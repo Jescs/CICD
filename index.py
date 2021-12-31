@@ -1,12 +1,14 @@
 
-from flask import Flask  # From module flask import class Flask
-app = Flask(__name__)    # Construct an instance of Flask class for our webapp
-
-@app.route('/')   # URL '/' to be handled by main() route handler
-def main():
-    """Say hello"""
-    return 'Hello, world!'
-
-if __name__ == '__main__':  # Script executed directly?
-    print("Hello World! Built with a Docker file.")
-    app.run(host="0.0.0.0", port=8765, debug=True,use_reloader=True)  # Launch built-in web server and run this Flask webapp
+from flask import Flask
+app = Flask(__name__)
+@app.route('/')
+def index():
+    return '<h1>Hello World!</h1>'
+@app.route('/hello')
+def hello():
+    return '<h1>Hello!</h1>'
+@app.route('/user/<name>')
+def user(name):
+    return '<h1>Hello, %s!</h1>' % name
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', debug=True, port = 5000) 
