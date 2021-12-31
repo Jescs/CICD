@@ -1,8 +1,6 @@
-FROM python:3.7-alpine
-
-WORKDIR /demoapp
-COPY ./ ./
-
-RUN pip install flask
-
+FROM python:3.6
+COPY . /app
+WORKDIR /app
+RUN pip install --no-cache-dir -r requirements.txt
+EXPOSE 5000
 CMD ["python", "index.py"]
